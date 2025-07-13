@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Mortgage\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AmortizationSchedule extends Model
+class ExtraRepaymentSchedule extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'loan_amortization_schedule';
+    protected $table = 'extra_repayment_schedule';
 
     protected $fillable = [
         'loan_id',
@@ -19,9 +19,10 @@ class AmortizationSchedule extends Model
         'monthly_payment',
         'principal_component',
         'interest_component',
+        'extra_payment',
         'ending_balance',
+        'remaining_loan_term',
     ];
-
     public function loan()
     {
         return $this->belongsTo(Loan::class);
