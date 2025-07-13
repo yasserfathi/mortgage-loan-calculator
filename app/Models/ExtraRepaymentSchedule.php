@@ -17,10 +17,10 @@ class ExtraRepaymentSchedule extends Model
         'month_number',
         'starting_balance',
         'monthly_payment',
-        'principal_paid',
-        'interest_paid',
+        'principal_component',
+        'interest_component',
         'extra_payment',
-        'ending_balance_after_extra',
+        'ending_balance',
         'remaining_loan_term',
     ];
     public function loan()

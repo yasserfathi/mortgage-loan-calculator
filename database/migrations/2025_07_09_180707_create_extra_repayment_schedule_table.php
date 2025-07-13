@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('principal_component', 15, 2);
             $table->decimal('interest_component', 15, 2);
             $table->decimal('extra_payment', 15, 2)->default(0.00);
-            $table->decimal('ending_balance_after_extra', 15, 2);
+            $table->decimal('ending_balance', 15, 2);
             $table->integer('remaining_loan_term')->nullable();
             $table->timestamps();
             $table->softDeletes();
