@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Modules\Mortgage\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\LoanRequest;
 use App\Models\Loan;
 use App\Models\AmortizationSchedule;
