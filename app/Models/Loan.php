@@ -14,13 +14,15 @@ class Loan extends Model
         'principal',
         'annual_interest_rate',
         'term_years',
-        'monthly_extra_payment',
+        'extra_payment',
+        'total_interest_paid'
     ];
 
     protected $casts = [
         'principal' => 'decimal:2',
         'annual_interest_rate' => 'decimal:2',
-        'monthly_extra_payment' => 'decimal:2',
+        'extra_payment' => 'decimal:2',
+        'total_interest_paid' => 'decimal:2',
         'created_at' => 'datetime:Y-m-d',
         'deleted_at' => 'datetime:Y-m-d',
     ];

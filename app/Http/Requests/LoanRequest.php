@@ -15,7 +15,7 @@ class LoanRequest extends FormRequest
     public function prepareForValidation(): void
     {
         $this->merge([
-            'monthly_extra_payment' => $this->input('monthly_extra_payment', 0),
+            'extra_payment' => $this->input('extra_payment', 0),
         ]);
     }
     public function rules(): array
@@ -24,7 +24,8 @@ class LoanRequest extends FormRequest
             'principal' => ['required', 'numeric', 'min:0'],
             'annual_interest_rate' => ['required', 'numeric', 'min:0'],
             'term_years' => ['required', 'integer', 'min:1'],
-            'monthly_extra_payment' => ['nullable', 'numeric', 'min:0'],
+            'extra_payment' => ['nullable', 'numeric', 'min:0'],
+            'total_interest_paid' => ['nullable', 'numeric', 'min:0'],
         ];
     }
     protected function failedValidation(Validator $validator)
@@ -49,8 +50,8 @@ class LoanRequest extends FormRequest
             'term_years.integer' => 'The loan term must be an integer.',
             'term_years.min' => 'The loan term must be at least 1 year.',
 
-            'monthly_extra_payment.numeric' => 'The extra payment must be a number.',
-            'monthly_extra_payment.min' => 'The extra payment cannot be negative.',
+            'extra_payment.numeric' => 'The extra payment must be a number.',
+            'extra_payment.min' => 'The extra payment cannot be negative.',
         ];
     }
 }

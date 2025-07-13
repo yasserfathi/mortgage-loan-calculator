@@ -16,7 +16,8 @@ return new class extends Migration
             $table->decimal('principal', 15, 2);
             $table->decimal('annual_interest_rate', 5, 2);
             $table->integer('term_years');
-            $table->decimal('monthly_extra_payment', 15, 2)->nullable();
+            $table->decimal('extra_payment', 15, 2)->nullable();
+            $table->decimal('total_interest_paid', 15, 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
