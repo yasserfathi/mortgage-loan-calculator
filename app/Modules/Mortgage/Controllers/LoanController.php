@@ -3,10 +3,10 @@
 namespace App\Modules\Mortgage\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoanRequest;
-use App\Models\Loan;
-use App\Models\AmortizationSchedule;
-use App\Models\ExtraRepaymentSchedule;
+use App\Modules\Mortgage\Requests\LoanRequest;
+use App\Modules\Mortgage\Models\Loan;
+use App\Modules\Mortgage\Models\AmortizationSchedule;
+use App\Modules\Mortgage\Models\ExtraRepaymentSchedule;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
