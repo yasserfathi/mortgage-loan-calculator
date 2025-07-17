@@ -25,7 +25,6 @@ class LoanRequest extends FormRequest
             'annual_interest_rate' => ['required', 'numeric', 'min:0'],
             'term_years' => ['required', 'integer', 'min:1'],
             'extra_payment' => ['nullable', 'numeric', 'min:0'],
-            'total_interest_paid' => ['nullable', 'numeric', 'min:0'],
         ];
     }
     protected function failedValidation(Validator $validator)
