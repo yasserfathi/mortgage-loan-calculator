@@ -26,11 +26,9 @@ A complete Mortgage Loan Calculator system for Laravel applications with API end
 php artisan migrate
 php artisan serve
 
-```bash
 cd front-end
 npm run dev
 
-```bash
 Backend URL: http://127.0.0.1:8000
 Frontend URL: http://localhost:3000
 
