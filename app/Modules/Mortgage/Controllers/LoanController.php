@@ -42,7 +42,7 @@ class LoanController extends Controller
         $loan->extra_payment = round($loan->extra_payment ?? 0, 2);
 
         $loan->extra_payment > 0
-            ? $this->generateExtraRepaymentSchedule($loan, $monthlyPayment, $monthlyRate, $balance)
+            ? $this->generateExtraRepaymentSchedule($loan, $monthlyPayment, $monthlyRate, $balance,$request->extra_payment)
             : $this->generateStandardAmortizationSchedule($loan, $monthlyPayment, $monthlyRate, $months, $balance);
 
         // ✅ Calculate total interest paid after creating schedule
@@ -56,10 +56,7 @@ class LoanController extends Controller
             'status' => 'success',
             'message' => 'Loan successfully created.',
             'data' => [
-                'loan' => $loan,
-                'monthly_payment' => $monthlyPayment,
-                'loan_term_months' => $months,
-                'total_interest_paid' => round($totalInterest, 2),
+                'loan_id' => $loan->id
             ],
         ], HttpResponse::HTTP_CREATED);
     }
@@ -85,16 +82,15 @@ class LoanController extends Controller
         }
     }
 
-    protected function generateExtraRepaymentSchedule($loan, $monthlyPayment, $monthlyRate, $balance)
+    protected function generateExtraRepaymentSchedule($loan, $monthlyPayment, $monthlyRate, $balance, $extra_payment)
     {
         $month = 1;
-        $extra = $loan->extra_payment;
-        $remainingLoanTerm = ceil($balance / ($monthlyPayment + $extra));
+        $remainingLoanTerm = ceil($balance / ($monthlyPayment + (float)$extra_payment));
 
         while ($balance > 0) {
             $interest = round($balance * $monthlyRate, 2);
             $principal = round($monthlyPayment - $interest, 2);
-            $totalPrincipal = $principal + $extra;
+            $totalPrincipal = $principal + $extra_payment;
             $ending = round($balance - $totalPrincipal, 2);
 
             ExtraRepaymentSchedule::create([
@@ -104,7 +100,7 @@ class LoanController extends Controller
                 'monthly_payment' => $monthlyPayment,
                 'principal_component' => $principal,
                 'interest_component' => $interest,
-                'extra_payment' => $extra,
+                'extra_payment' => $extra_payment,
                 'ending_balance' => max($ending, 0),
                 'remaining_loan_term' => max($remainingLoanTerm - $month + 1, 0),
             ]);
@@ -114,13 +110,17 @@ class LoanController extends Controller
         }
     }
 
-    public function show(Loan $loan)
+    public function total()
     {
-        $loan->load(['amortizationSchedule', 'extraRepaymentSchedule']);
+        $amortizationSchedule = Loan::where('extra_payment',0)->count();
+        $extraRepaymentSchedule = Loan::where('extra_payment','>',0)->count();
 
         return response([
             'status' => 'success',
-            'data' => $loan,
+            'data' => [
+            'amortization' => $amortizationSchedule,
+            'extraRepayment' => $extraRepaymentSchedule,
+        ],
         ], HttpResponse::HTTP_OK);
     }
 }
