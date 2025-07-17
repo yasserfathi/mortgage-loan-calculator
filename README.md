@@ -23,12 +23,10 @@ A complete Mortgage Loan Calculator system for Laravel applications with API end
 - Database (SQLite)
 
 ```bash
-composer install
 php artisan migrate
 php artisan serve
 
 cd front-end
-npm install
 npm run dev
 
 Backend URL: http://127.0.0.1:8000
