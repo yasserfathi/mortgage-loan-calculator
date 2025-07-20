@@ -23,7 +23,8 @@ A complete Mortgage Loan Calculator system for Laravel applications with API end
 - Database (SQLite)
 
 <<<<<<< HEAD
-```bash 
+```bash
+cp .env.example .env
 composer install
 =======
 ```bash
