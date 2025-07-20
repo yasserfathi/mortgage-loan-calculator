@@ -22,13 +22,10 @@ A complete Mortgage Loan Calculator system for Laravel applications with API end
 - Laravel 12
 - Database (SQLite)
 
-<<<<<<< HEAD
 ```bash
 cp .env.example .env
 composer install
 =======
-```bash
->>>>>>> 9a58d4b74e4ec248ba4a5dfd3aa7725f2c9754cd
 php artisan migrate
 php artisan serve
 
