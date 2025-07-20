@@ -25,7 +25,6 @@ A complete Mortgage Loan Calculator system for Laravel applications with API end
 ```bash
 cp .env.example .env
 composer install
-=======
 php artisan migrate
 php artisan serve
 
